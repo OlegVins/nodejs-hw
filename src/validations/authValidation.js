@@ -16,6 +16,6 @@ export const loginUserSchema = {
       email:
         Joi.string().email().required(),
       password:
-        Joi.string().password().required(),
+        Joi.string().required(),
     }),
 };

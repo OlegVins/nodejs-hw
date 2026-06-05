@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import createHttpError from "http-errors";
 import { User } from '../models/user.js';
 import { createSession, setSessionCookies } from '../services/auth.js';
-import { Session } from '../models/sessions.js';
+import { Session } from '../models/session.js';
 
 export const registerUser = async (req, res) => {
   const { email, password } = req.body;
@@ -59,7 +59,7 @@ export const logoutUser = async (req, res) => {
     await Session.deleteOne({ _id: sessionId });
   }
 
-  res.clearCookie('sessoinId');
+  res.clearCookie('sessionId');
   res.clearCookie('accessToken');
   res.clearCookie('refreshToken');
 
@@ -69,7 +69,7 @@ export const logoutUser = async (req, res) => {
 export const refreshUserSession = async (req, res) => {
   const { sessionId, refreshToken } = req.cookies;
 
-  if (!sessionId || refreshToken) {
+  if (!sessionId || !refreshToken) {
     throw createHttpError(401, 'Missing session credentials');
   }
 
