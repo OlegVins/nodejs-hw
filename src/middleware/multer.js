@@ -11,9 +11,9 @@ export const upload = multer({
       ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
 
     if (allowedTypes.includes(file.mimetype)) {
-      cb(null, true)
+      cb(null, true);
     } else {
-      cb(new Error('Only images allowed'), false)
+      cb(new Error('Only images allowed'), false);
     }
   },
 });

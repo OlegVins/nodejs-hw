@@ -148,7 +148,7 @@ export const requestResetEmail = async (req, res, next) => {
   }
 
   res.status(200).json({
-    message: 'If this email exists, a reset link has been sent',
+    message: 'Password reset email sent successfully',
   });
 };
 
@@ -168,7 +168,7 @@ export const resetPassword = async (req, res) => {
   });
 
   if (!user) {
-    throw createHttpError(404);
+    throw createHttpError(404, 'User not found');
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
